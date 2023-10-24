@@ -6,9 +6,25 @@ import { Paragraph } from "theme-ui";
 
 const Main = ({ title, body }) => {
   return (
-    <Box>
-      <Heading>{title}</Heading>
-      <Paragraph>{body}</Paragraph>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        // set this to `minHeight: '100vh'` for full viewport height
+        minHeight: 256,
+      }}
+    >
+      <Heading
+        as="h1"
+        sx={{
+          fontSize: [3, 4, 5],
+          fontVariant: "small-caps",
+          py: 2,
+        }}
+      >
+        {title}
+      </Heading>
+      <Paragraph dangerouslySetInnerHTML={{ __html: body }}></Paragraph>
     </Box>
   );
 };

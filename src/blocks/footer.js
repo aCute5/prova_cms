@@ -1,14 +1,13 @@
 import React from "react";
 import { Box, Text } from "@theme-ui/components";
 import { Link as GatasbyLink } from "gatsby";
+import { Button } from "theme-ui";
+import { Link as GatsbyLink } from "gatsby";
 
-const Footer = ({ title, links }) => {
+const Footer = ({ body }) => {
   return (
     <Box>
-      <Text>{title}</Text>
-      {links.map((link) => (
-        <GatasbyLink to={link.slug}>{link.title}</GatasbyLink>
-      ))}
+      <Text dangerouslySetInnerHTML={{ __html: body }}></Text>
     </Box>
   );
 };

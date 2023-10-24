@@ -6,13 +6,22 @@ import { Slider } from "theme-ui";
 const ImageGallery = ({ title, images }) => {
   return (
     <Box>
+      <h1>Questa è la gallery </h1>
       <Text>{title}</Text>
-      <Slider>
-        {images.map((image) => (
-          <GatsbyImage image={image.gatsbyImageData} alt={title} />
-        ))}
-      </Slider>
+      <Slider></Slider>
+      {images.map((image) => {
+        return (
+          <Box>
+            <GatsbyImage
+              image={image.gatsbyImageData}
+              alt={image.alt}
+              key={image.id}
+            />
+          </Box>
+        );
+      })}
     </Box>
   );
 };
+
 export default ImageGallery;

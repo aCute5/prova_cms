@@ -8,7 +8,7 @@ const Article = ({ title, body, links }) => {
   return (
     <Box>
       <Text>{title}</Text>
-      <Text>{body}</Text>
+      <Text dangerouslySetInnerHTML={{ __html: body }}></Text>
       {links.map((link) => (
         <GatsbyLink to={link.slug}>{link.title}</GatsbyLink>
       ))}

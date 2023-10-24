@@ -13,38 +13,36 @@ const Page = ({ data: { page } }) => {
   return (
     <Box>
       {page.content.map((block) => {
-        {
-          block.model.apiKey === "hero" && (
-            <Hero title={block.title} image={block.image.gatsbyImageData} />
-          );
+        if (block.model) {
+          if (block.model.apiKey === "hero") {
+            return (
+              <Hero title={block.title} image={block.image.gatsbyImageData} />
+            );
+          }
+          if (block.model.apiKey === "main") {
+            return <Main title={block.title} body={block.body} />;
+          }
+          if (block.model.apiKey === "page_collection") {
+            return <PageCollection title={block.title} links={block.links} />;
+          }
+          if (block.model.apiKey === "article") {
+            return (
+              <Article
+                title={block.title}
+                body={block.body}
+                links={block.links}
+              />
+            );
+          }
+          if (block.model.apiKey === "image_gallery") {
+            return <ImageGallery title={block.title} images={block.images} />;
+          }
+          if (block.model.apiKey === "footer") {
+            return <Footer body={block.body} />;
+          }
         }
-        {
-          block.model.apiKey === "main" && (
-            <Main title={block.title} body={block.body} />
-          );
-        }
-        {
-          block.model.apiKey === "page_collection" && (
-            <PageCollection title={block.title} links={block.links} />
-          );
-        }
-        {
-          block.model.apiKey === "article" && (
-            <Article
-              title={block.title}
-              body={block.body}
-              links={block.links}
-            />
-          );
-        }
-        {
-          block.model.apiKey === "image_gallery" && (
-            <ImageGallery title={block.title} images={block.images} />
-          );
-        }
-        {
-          block.model.apiKey === "footer" && <Footer body={block.body} />;
-        }
+        // Se block.model non esiste o non ha una apiKey valida, restituisci null.
+        return null;
       })}
     </Box>
   );
@@ -68,7 +66,7 @@ export const query = graphql`
         ... on DatoCmsHero {
           title
           image {
-            gatsbyImageData
+            gatsbyImageData(width: 800, layout: FIXED)
           }
           model {
             apiKey
@@ -86,7 +84,7 @@ export const query = graphql`
           id
           title
           images {
-            gatsbyImageData
+            gatsbyImageData(width: 400, layout: FIXED)
           }
           model {
             apiKey
